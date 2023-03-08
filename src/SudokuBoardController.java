@@ -200,7 +200,6 @@ public class SudokuBoardController
         }
         else if(preset == 3)
         {
-            //aleks är fin och jag älskar henne
             int[][] sudokuPreset = {
                 {0, 0, 8, 0, 0, 9, 0, 6, 2},
                 {0, 0, 0, 0, 0, 0, 0, 0, 5},
@@ -213,7 +212,7 @@ public class SudokuBoardController
                 {0, 0, 0, 0, 0, 0, 4, 0, 0}
         };
 
-        sudokuMatrix.clear(); //
+        sudokuMatrix.clear();
         sudokuMatrix.setMatrix(sudokuPreset);
 
         }
