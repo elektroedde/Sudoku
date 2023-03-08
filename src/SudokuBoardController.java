@@ -1,6 +1,5 @@
 import java.awt.Container;
 import java.awt.GridLayout;
-import java.util.concurrent.TimeUnit;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -20,7 +19,7 @@ public class SudokuBoardController
 {
     private JFormattedTextField[][] graphicalBoard;
     private String[] selections =
-    { "Select sudoku", "Empty", "Sudoku 1", "Sudoku 2", "Sudoku 3" };
+    { "Empty sudoku", "Sudoku 1", "Sudoku 2", "Sudoku 3" };
 
     public SudokuBoardController(SudokuSolver sudokuMatrix)
     {
@@ -76,7 +75,6 @@ public class SudokuBoardController
 
         solveButton.addActionListener(e ->
         {
-            // Takes the current board values and adds them to the sudoku matrix
             boardValuesToMatrix(sudokuMatrix);
 
             if (!sudokuMatrix.solve())
@@ -93,22 +91,21 @@ public class SudokuBoardController
 
         presets.addActionListener(e ->
         {
-            String currentSelection = (String) presets.getSelectedItem();
-            if (currentSelection.compareTo("Empty") == 0)
+            if (presets.getSelectedIndex() == 0)
             {
                 sudokuMatrix.clear();
             } 
-            else if (currentSelection.compareTo("Sudoku 1") == 0)
+            else if (presets.getSelectedIndex() == 1)
             {
-                setPreset1(sudokuMatrix);
+                setPreset(1, sudokuMatrix);
+            }
+            else if (presets.getSelectedIndex() == 2)
+            {
+                setPreset(2, sudokuMatrix);
             } 
-            else if (currentSelection.compareTo("Sudoku 2") == 0)
+            else if (presets.getSelectedIndex() == 3)
             {
-                setPreset2(sudokuMatrix);
-            } 
-            else if (currentSelection.compareTo("Sudoku 3") == 0)
-            {
-                setPreset3(sudokuMatrix);
+                setPreset(3, sudokuMatrix);
             }
 
             updateBoard(sudokuMatrix);
@@ -116,21 +113,7 @@ public class SudokuBoardController
 
         exitButton.addActionListener(e ->
         {
-            for(int i = 0; i < 9; i++)
-            {
-                for(int j = 0; j < 9; j++)
-                {
-                    sudokuMatrix.add(i, j, 5);
-                    try
-                    {
-                        TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException e1)
-                    {
-                        System.out.println("TEEE");
-                    }
-                    updateBoard(sudokuMatrix);
-                }
-            }
+            System.exit(0);
         });
 
         pane.add(sudokuPanel, BorderLayout.NORTH);
@@ -178,93 +161,64 @@ public class SudokuBoardController
         }
     }
 
-    private void setPreset1(SudokuSolver sudokuMatrix)
+    private void setPreset(int preset, SudokuSolver sudokuMatrix)
     {
-        sudokuMatrix.clear();
-        sudokuMatrix.add(2, 0, 6);
-        sudokuMatrix.add(1, 1, 8);
-        sudokuMatrix.add(2, 2, 2);
-        sudokuMatrix.add(1, 5, 7);
-        sudokuMatrix.add(0, 6, 2);
-        sudokuMatrix.add(1, 7, 9);
-        sudokuMatrix.add(2, 6, 5);
-        sudokuMatrix.add(3, 1, 7);
-        sudokuMatrix.add(3, 4, 6);
-        sudokuMatrix.add(4, 3, 9);
-        sudokuMatrix.add(4, 5, 1);
-        sudokuMatrix.add(5, 4, 2);
-        sudokuMatrix.add(5, 7, 4);
-        sudokuMatrix.add(6, 2, 5);
-        sudokuMatrix.add(6, 6, 6);
-        sudokuMatrix.add(6, 8, 3);
-        sudokuMatrix.add(7, 1, 9);
-        sudokuMatrix.add(7, 3, 4);
-        sudokuMatrix.add(7, 7, 7);
-        sudokuMatrix.add(8, 2, 6);
-    }
+        if(preset == 1)
+        {
+            int[][] sudokuPreset = {
+                {0, 0, 0, 0, 0, 0, 2, 0, 0},
+                {0, 8, 0, 0, 0, 7, 0, 9, 0},
+                {6, 0, 2, 0, 0, 0, 5, 0, 0},
+                {0, 7, 0, 0, 6, 0, 0, 0, 0},
+                {0, 0, 0, 9, 0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 2, 0, 0, 4, 0},
+                {0, 0, 5, 0, 0, 0, 6, 0, 3},
+                {0, 9, 0, 4, 0, 0, 0, 7, 0},
+                {0, 0, 6, 0, 0, 0, 0, 0, 0},
+            };
+        
+            sudokuMatrix.clear();
+            sudokuMatrix.setMatrix(sudokuPreset);
+        }
+        else if(preset == 2)
+        {
+            int[][] sudokuPreset = {
+                {0, 0, 0, 8, 0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 4, 3},
+                {5, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 7, 0, 8, 0, 0},
+                {0, 0, 0, 0, 0, 0, 1, 0, 0},
+                {0, 2, 0, 0, 3, 0, 0, 0, 0},
+                {6, 0, 0, 0, 0, 0, 0, 7, 5},
+                {0, 0, 3, 4, 0, 0, 0, 0, 0},
+                {0, 0, 0, 2, 0, 0, 6, 0, 0},
+            };
 
-    private void setPreset2(SudokuSolver sudokuMatrix)
-    {
-        sudokuMatrix.clear();
-        sudokuMatrix.add(0, 3, 8);
-        sudokuMatrix.add(0, 5, 1);
-        sudokuMatrix.add(1, 7, 4);
-        sudokuMatrix.add(1, 8, 3);
-        sudokuMatrix.add(2, 0, 5);
-        sudokuMatrix.add(3, 4, 7);
-        sudokuMatrix.add(3, 6, 8);
-        sudokuMatrix.add(4, 6, 1);
-        sudokuMatrix.add(5, 1, 2);
-        sudokuMatrix.add(5, 4, 3);
-        sudokuMatrix.add(6, 0, 6);
-        sudokuMatrix.add(6, 7, 7);
-        sudokuMatrix.add(6, 8, 5);
-        sudokuMatrix.add(7, 2, 3);
-        sudokuMatrix.add(7, 3, 4);
-        sudokuMatrix.add(8, 3, 2);
-        sudokuMatrix.add(8, 6, 6);
-    }
+            sudokuMatrix.clear();
+            sudokuMatrix.setMatrix(sudokuPreset);
 
-    private void setPreset3(SudokuSolver sudokuMatrix)
-    {
-        int[][] test = {
-            {1, 2, 3, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0}
-    };
+        }
+        else if(preset == 3)
+        {
+            int[][] sudokuPreset = {
+                {0, 0, 8, 0, 0, 9, 0, 6, 2},
+                {0, 0, 0, 0, 0, 0, 0, 0, 5},
+                {1, 0, 2, 5, 0, 0, 0, 0, 0},
+                {0, 0, 0, 2, 1, 0, 0, 9, 0},
+                {0, 5, 0, 0, 0, 0, 6, 0, 0},
+                {6, 0, 0, 0, 0, 0, 0, 2, 8},
+                {4, 1, 0, 6, 0, 8, 0, 0, 0},
+                {8, 6, 0, 0, 3, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 4, 0, 0}
+        };
 
-        //sudokuMatrix.add(0, 2, 8);
-        //sudokuMatrix.add(0, 5, 9);
-        //sudokuMatrix.add(0, 7, 6);
-        //sudokuMatrix.add(0, 8, 2);
-        //sudokuMatrix.add(1, 8, 5);
-        //sudokuMatrix.add(2, 0, 1);
-        //sudokuMatrix.add(2, 2, 2);
-        //sudokuMatrix.add(2, 3, 5);
-        //sudokuMatrix.add(3, 3, 2);
-        //sudokuMatrix.add(3, 4, 1);
-        //sudokuMatrix.add(3, 7, 9);
-        //sudokuMatrix.add(4, 1, 5);
-        //sudokuMatrix.add(4, 6, 6);
-        //sudokuMatrix.add(5, 0, 6);
-        //sudokuMatrix.add(5, 7, 2);
-        //sudokuMatrix.add(5, 8, 8);
-        //sudokuMatrix.add(6, 0, 4);
-        //sudokuMatrix.add(6, 1, 1);
-        //sudokuMatrix.add(6, 3, 6);
-        //sudokuMatrix.add(6, 5, 8);
-        //sudokuMatrix.add(7, 0, 8);
-        //sudokuMatrix.add(7, 1, 6);
-        //sudokuMatrix.add(7, 4, 3);
-        //sudokuMatrix.add(7, 6, 1);
-        //sudokuMatrix.add(8, 6, 4);
         sudokuMatrix.clear();
-        sudokuMatrix.setMatrix(test);
+        sudokuMatrix.setMatrix(sudokuPreset);
+
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "No such preset");
+        }
     }
 }
