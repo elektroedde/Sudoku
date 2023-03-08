@@ -227,31 +227,44 @@ public class SudokuBoardController
 
     private void setPreset3(SudokuSolver sudokuMatrix)
     {
+        int[][] test = {
+            {1, 2, 3, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0}
+    };
+
+        //sudokuMatrix.add(0, 2, 8);
+        //sudokuMatrix.add(0, 5, 9);
+        //sudokuMatrix.add(0, 7, 6);
+        //sudokuMatrix.add(0, 8, 2);
+        //sudokuMatrix.add(1, 8, 5);
+        //sudokuMatrix.add(2, 0, 1);
+        //sudokuMatrix.add(2, 2, 2);
+        //sudokuMatrix.add(2, 3, 5);
+        //sudokuMatrix.add(3, 3, 2);
+        //sudokuMatrix.add(3, 4, 1);
+        //sudokuMatrix.add(3, 7, 9);
+        //sudokuMatrix.add(4, 1, 5);
+        //sudokuMatrix.add(4, 6, 6);
+        //sudokuMatrix.add(5, 0, 6);
+        //sudokuMatrix.add(5, 7, 2);
+        //sudokuMatrix.add(5, 8, 8);
+        //sudokuMatrix.add(6, 0, 4);
+        //sudokuMatrix.add(6, 1, 1);
+        //sudokuMatrix.add(6, 3, 6);
+        //sudokuMatrix.add(6, 5, 8);
+        //sudokuMatrix.add(7, 0, 8);
+        //sudokuMatrix.add(7, 1, 6);
+        //sudokuMatrix.add(7, 4, 3);
+        //sudokuMatrix.add(7, 6, 1);
+        //sudokuMatrix.add(8, 6, 4);
         sudokuMatrix.clear();
-        sudokuMatrix.add(0, 2, 8);
-        sudokuMatrix.add(0, 5, 9);
-        sudokuMatrix.add(0, 7, 6);
-        sudokuMatrix.add(0, 8, 2);
-        sudokuMatrix.add(1, 8, 5);
-        sudokuMatrix.add(2, 0, 1);
-        sudokuMatrix.add(2, 2, 2);
-        sudokuMatrix.add(2, 3, 5);
-        sudokuMatrix.add(3, 3, 2);
-        sudokuMatrix.add(3, 4, 1);
-        sudokuMatrix.add(3, 7, 9);
-        sudokuMatrix.add(4, 1, 5);
-        sudokuMatrix.add(4, 6, 6);
-        sudokuMatrix.add(5, 0, 6);
-        sudokuMatrix.add(5, 7, 2);
-        sudokuMatrix.add(5, 8, 8);
-        sudokuMatrix.add(6, 0, 4);
-        sudokuMatrix.add(6, 1, 1);
-        sudokuMatrix.add(6, 3, 6);
-        sudokuMatrix.add(6, 5, 8);
-        sudokuMatrix.add(7, 0, 8);
-        sudokuMatrix.add(7, 1, 6);
-        sudokuMatrix.add(7, 4, 3);
-        sudokuMatrix.add(7, 6, 1);
-        sudokuMatrix.add(8, 6, 4);
+        sudokuMatrix.setMatrix(test);
     }
 }
